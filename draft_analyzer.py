@@ -28,7 +28,7 @@ picks_df['Pick'] = picks_df['round'].astype(str) + "." + picks_df['draft_slot'].
 users_df = pd.DataFrame(users)
 users_df = users_df[['user_id', 'display_name']]
 
-players_df = pd.read_csv('/Sleeper/players-2022-04-13.csv')
+players_df = pd.read_csv('/Users/nick/Sleeper-Dashboard/Sleeper/players-2022-04-13.csv')
 
 users_picks = picks_df.merge(users_df, left_on='picked_by', right_on='user_id', how="left")
 
