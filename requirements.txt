@@ -78,3 +78,4 @@ cachetools~=5.0.0
 validators~=0.19.0
 pyrsistent~=0.18.1
 zipp~=3.8.0
+sleeper-api-wrapper
