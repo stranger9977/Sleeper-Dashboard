@@ -33,7 +33,8 @@ players_df = pd.read_csv('/Users/nick/Sleeper-Dashboard/Sleeper/players-2022-04-
 users_picks = picks_df.merge(users_df, left_on='picked_by', right_on='user_id', how="left")
 
 draft_results = users_picks.merge(players_df, on='player_id', how='left')
-draft_results_df = draft_results[['player_id', 'display_name', 'full_name', 'Pick', 'pick_no']]
+
+draft_results_df = draft_results[['player_id', 'display_name', 'full_name', 'weight', 'height', 'Pick', 'pick_no']]
 
 # import data from KTC, ADP, ETR, and DP
 
@@ -66,7 +67,7 @@ draft_value_df = draft_value_df[['Sleeper_ID', 'Player_Name', 'age', 'pos', 'tea
 draft_result_value_df = draft_results_df.merge(draft_value_df, left_on='player_id', right_on='Sleeper_ID', how='outer')
 
 final_df = draft_result_value_df.rename(columns={'display_name': 'Manager'})
-final_df = final_df[['Player_Name', 'team', 'pos', 'age', 'pick_no', 'Manager', 'Sims Value']].sort_values(
+final_df = final_df[['Player_Name', 'team', 'pos', 'age', 'pick_no', 'Manager', 'Sims Value','weight', 'height' ]].sort_values(
     by='pick_no')
 final_df = final_df.dropna(subset=['pick_no'])
 values = {"team": "ATL", "pos": 'WR', "age": 20.8}
@@ -80,6 +81,10 @@ fig2 = px.histogram(final_df, x="Manager", y="Sims Value", text_auto=True,
 
 fig3 = px.histogram(final_df, x='Manager', y='age', text_auto=True, title='Total Team Age')
 
+fig4 = px.histogram(final_df, x='Manager', y='weight', text_auto=True, title='Value by THICCness')
+fig5 = px.histogram(final_df, x='Manager', y='height', text_auto=True, title='Who drafts the short kings?')
 st.plotly_chart(fig2, use_container_width=True)
 st.plotly_chart(fig, use_container_width=True)
 st.plotly_chart(fig3, use_container_width=True)
+st.plotly_chart(fig4, use_container_width=True)
+st.plotly_chart(fig5, use_container_width=True)
