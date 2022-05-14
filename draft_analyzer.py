@@ -1,10 +1,11 @@
-from sleeper_wrapper import League
-from sleeper_wrapper import User
-from sleeper_wrapper import Players
 import pandas as pd
-import streamlit as st
-import requests
 import plotly.express as px
+import requests
+from sleeper_wrapper import League
+import streamlit as st
+import numpy as np
+import plost
+from PIL import Image
 
 st.set_page_config(page_title="Run_the_Sims")
 user_input = st.text_input("enter your league id here", 824128043063820288)
@@ -86,5 +87,5 @@ fig5 = px.histogram(final_df, x='Manager', y='height', text_auto=True, title='Wh
 st.plotly_chart(fig2, use_container_width=True)
 st.plotly_chart(fig, use_container_width=True)
 st.plotly_chart(fig3, use_container_width=True)
-st.plotly_chart(fig4, use_container_width=True)
-st.plotly_chart(fig5, use_container_width=True)
+# st.plotly_chart(fig4, use_container_width=True)
+# st.plotly_chart(fig5, use_container_width=True)
