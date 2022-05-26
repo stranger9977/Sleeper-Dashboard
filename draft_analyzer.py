@@ -95,7 +95,9 @@ draft_value_df['ETR Rank'] = draft_value_df['SF/TE Prem']
 
 ranks = ['KTC Rank', 'ETR Rank', 'ADP', 'DyPro Rank']
 draft_value_df['Sims Rank'] = draft_value_df[ranks].mean(axis=1)
-
+positions = ['QB', 'RB', 'WR', 'TE']
+position_filter = draft_results_df['position'].isin(positions)
+draft_results_df = draft_results_df[position_filter]
 draft_results_df[['player_id', 'pick_no']] = draft_results_df[['player_id', 'pick_no']].astype(float)
 
 draft_value_df = draft_value_df[
