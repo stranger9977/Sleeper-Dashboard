@@ -39,7 +39,7 @@ users_picks = picks_df.merge(users_df, left_on='picked_by', right_on='user_id', 
 
 draft_results = users_picks.merge(players_df, on='player_id', how='left')
 
-draft_results_df = draft_results[['player_id', 'display_name', 'full_name', 'weight', 'height', 'Pick', 'pick_no']]
+draft_results_df = draft_results[['player_id', 'display_name', 'full_name','position','weight', 'height', 'Pick', 'pick_no']]
 
 # import data from KTC, ADP, ETR, and DP
 
@@ -95,7 +95,9 @@ draft_value_df['ETR Rank'] = draft_value_df['SF/TE Prem']
 
 ranks = ['KTC Rank', 'ETR Rank', 'ADP', 'DyPro Rank']
 draft_value_df['Sims Rank'] = draft_value_df[ranks].mean(axis=1)
-
+positions = ['QB', 'RB', 'WR', 'TE']
+position_filter = draft_results_df['position'].isin(positions)
+draft_results_df = draft_results_df[position_filter]
 draft_results_df[['player_id', 'pick_no']] = draft_results_df[['player_id', 'pick_no']].astype(float)
 
 draft_value_df = draft_value_df[
