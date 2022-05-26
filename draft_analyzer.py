@@ -39,7 +39,7 @@ users_picks = picks_df.merge(users_df, left_on='picked_by', right_on='user_id', 
 
 draft_results = users_picks.merge(players_df, on='player_id', how='left')
 
-draft_results_df = draft_results[['player_id', 'display_name', 'full_name', 'weight', 'height', 'Pick', 'pick_no']]
+draft_results_df = draft_results[['player_id', 'display_name', 'full_name','position','weight', 'height', 'Pick', 'pick_no']]
 
 # import data from KTC, ADP, ETR, and DP
 
