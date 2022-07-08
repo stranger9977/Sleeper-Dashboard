@@ -35,9 +35,10 @@ time.sleep(10)
 
 driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div[1]/div[3]/button").click()
 
-csv_url = urljoin(url, driver.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div[2]/div/div[2]/a").get_attribute("href"))
+csv_url = urljoin(url + "/", driver.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div[2]/div/div[2]/a").get_attribute("href"))
+print(csv_url)
 from datetime import datetime
-urlretrieve(csv_url, f"underdog_adp-{datetime.now():%Y-%m-%d}.csv")
+urlretrieve(csv_url,  f"underdog_adp-{datetime.now():%Y-%m-%d}.csv")
 
 
 

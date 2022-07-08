@@ -13,7 +13,8 @@ import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
-driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -29,7 +30,12 @@ pd.set_option("display.max_columns", 99)
 
 
 
+options = webdriver.ChromeOptions()
 
+preferences = {'download.default_directory': '/Users/nick/Sleeper-Dashboard/Data'}
+
+options.add_experimental_option("prefs", preferences)
+driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), chrome_options=options)
 
 # set url
 url = 'https://www.4for4.com/'
@@ -42,26 +48,21 @@ driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[3]/i
 driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[4]/input").send_keys(password)
 driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[5]/input").click()
 
+url2 = 'https://www.4for4.com/full-impact/cheatsheet/QB/60444/ff_nflstats_early'
+
+driver.get(url2)
 # wait the ready state to be complete
 WebDriverWait(driver=driver, timeout=10).until(
     lambda x: x.execute_script("return document.readyState === 'complete'")
 )
 
-driver.get('https://www.4for4.com/projections_csv/60444')
+
+driver.get(url2)
 
 time.sleep(10)
 
-csv_url = urljoin(url, driver.find_element(By.XPATH, "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").get_attribute("href"))
-print(csv_url)
-from datetime import datetime
-urlretrieve(csv_url, f"4for4_projections-{datetime.now():%Y-%m-%d}.csv")
-
-
+driver.find_element(By.XPATH, "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").click()
+time.sleep(5)
 # df = pd.read_html(str(table))[0]
 # df = df.iloc[:, 1:]
 # print(df.head())
-
-
-
-
-
