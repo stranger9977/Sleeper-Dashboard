@@ -1,4 +1,6 @@
 from pprint import pprint
+from urllib.parse import urljoin
+from urllib.request import urlretrieve
 
 import requests
 import json
@@ -31,34 +33,28 @@ pd.set_option("display.max_columns", 99)
 
 # set url
 url = 'https://www.4for4.com/'
-
 driver.get(url)
-username = 'nick.gurol'
-password = "22eTyS8JUx!fben"
+driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/div/div/div[4]/div/div[1]/div/div/div/a").click()
+username = 'nickgurol@gmail.com'
+password = "2UbJ4W!jVLGurWW"
 # # login to website
-driver.find_element(By.ID, "user_login").send_keys(username)
-driver.find_element(By.ID, "user_pass").send_keys(password)
-driver.find_element(By.ID, "wp-submit").click()
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[3]/input").send_keys(username)
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[4]/input").send_keys(password)
+driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[5]/input").click()
 
 # wait the ready state to be complete
 WebDriverWait(driver=driver, timeout=10).until(
     lambda x: x.execute_script("return document.readyState === 'complete'")
 )
-driver.get('https://establishtherun.com/etrs-top-300-for-underdogfantasy/')
 
-page_source = driver.page_source
+driver.get('https://www.4for4.com/projections_csv/60444')
 
-soup = page_source
+time.sleep(10)
 
-df = pd.read_html(driver.page_source, index_col='Player',flavor='html5lib')[0]
-
-print(df)
-
-
+csv_url = urljoin(url, driver.find_element(By.XPATH, "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").get_attribute("href"))
+print(csv_url)
 from datetime import datetime
-df.to_csv(f'/Users/nick/Sleeper-Dashboard/Data/etr_underdog_rankings-{datetime.now():%Y-%m-%d}.csv')
-
-
+urlretrieve(csv_url, f"4for4_projections-{datetime.now():%Y-%m-%d}.csv")
 
 
 # df = pd.read_html(str(table))[0]
