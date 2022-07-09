@@ -14,7 +14,6 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service as ChromeService
 from webdriver_manager.chrome import ChromeDriverManager
 
-
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
@@ -27,8 +26,6 @@ from json import JSONDecoder
 # from user_agent import random_header
 pd.set_option("display.max_columns", 99)
 pd.set_option("display.max_columns", 99)
-
-
 
 options = webdriver.ChromeOptions()
 
@@ -56,12 +53,12 @@ WebDriverWait(driver=driver, timeout=10).until(
     lambda x: x.execute_script("return document.readyState === 'complete'")
 )
 
-
 driver.get(url2)
 
 time.sleep(10)
 
-driver.find_element(By.XPATH, "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").click()
+driver.find_element(By.XPATH,
+                    "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").click()
 time.sleep(5)
 # df = pd.read_html(str(table))[0]
 # df = df.iloc[:, 1:]
