@@ -61,7 +61,7 @@ print(df)
 
 
 from datetime import datetime
-df.to_csv(f'/Users/nick/UnderdogVORmodel/data/ETR DATA/etr_underdog_rankings-{datetime.now():%Y-%m-%d}.csv')
+df.to_csv(f'/Users/nick/Sleeper-Dashboard/Data/etr_underdog_rankings-{datetime.now():%Y-%m-%d}.csv')
 
 
 

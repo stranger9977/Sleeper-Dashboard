@@ -35,31 +35,30 @@ options.add_experimental_option("prefs", preferences)
 driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()), chrome_options=options)
 
 # set url
-url = 'https://www.4for4.com/'
+url = 'https://www.cbssports.com/login?product_abbrev=mgmt&xurl=https%3A%2F%2Fwhitey.football.cbssports.com%2F&master_product=39258'
 driver.get(url)
-driver.find_element(By.XPATH, "/html/body/div[2]/div/div[1]/div/div/div[4]/div/div[1]/div/div/div/a").click()
-username = 'nickgurol@gmail.com'
-password = "2UbJ4W!jVLGurWW"
-# # login to website
-driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[3]/input").send_keys(username)
-driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[4]/input").send_keys(password)
-driver.find_element(By.XPATH, "/html/body/div[6]/div[2]/div[2]/form/div/div[5]/input").click()
 
-url2 = 'https://www.4for4.com/full-impact/cheatsheet/QB/60444/ff_nflstats_early'
+
+username = 'nickgurol@gmail.com'
+password = "6iaVy5!xtd6P5%X"
+# # login to website
+driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div/div/form/div[1]/div[1]/div[1]/div/div[1]/div/input").send_keys(username)
+driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div/div/form/div[1]/div[1]/div[2]/div/div[1]/div/input").send_keys(password)
+driver.find_element(By.XPATH, "/html/body/div[3]/div/div/div/div/form/div[1]/div[2]/input").click()
+
+url2 = 'https://whitey.football.cbssports.com/draft/results/2021:Pre-season:Pre-season'
 
 driver.get(url2)
 # wait the ready state to be complete
 WebDriverWait(driver=driver, timeout=10).until(
-    lambda x: x.execute_script("return document.readyState === 'complete'")
-)
+    lambda x: x.execute_script("return document.readyState === 'complete'"))
 
 driver.get(url2)
 
-time.sleep(10)
 
-driver.find_element(By.XPATH,
-                    "/html/body/div[4]/div/div[3]/div/div[1]/div/div/div/div/div/div/div[2]/div/div[2]/a").click()
-time.sleep(5)
+
+driver.find_element(By.XPATH,"/html/body/div[1]/div/div[1]/div[5]/div/button[2]").click()
+
 
 # df = pd.read_html(str(table))[0]
 # df = df.iloc[:, 1:]

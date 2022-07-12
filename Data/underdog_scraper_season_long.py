@@ -31,12 +31,11 @@ driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div[2]/div/form/
 # wait the ready state to be complete
 driver.get('https://underdogfantasy.com/rankings/nfl/f659a9be-fd34-4a1e-9c43-0816267e603d')
 
-time.sleep(10)
+time.sleep(20)
 
 driver.find_element(By.XPATH, "/html/body/div[1]/div/div/div[2]/div[1]/div[3]/button").click()
 
 csv_url = urljoin(url + "/", driver.find_element(By.XPATH, "/html/body/div[1]/div/div[1]/div[2]/div/div[2]/a").get_attribute("href"))
-print(csv_url)
 from datetime import datetime
 urlretrieve(csv_url,  f"underdog_adp-{datetime.now():%Y-%m-%d}.csv")
 
